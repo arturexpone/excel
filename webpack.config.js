@@ -4,22 +4,28 @@ const HTMLWebpackPlugin = require('html-webpack-plugin');
 const CopyPlugin = require('copy-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
-const isProduction = process.env.NODE_ENV === 'production';
-const isDevelopment = !isProduction;
+const isProd = process.env.NODE_ENV === 'production';
+const isDev = !isProd;
 
-const filename = (ext) => isDevelopment ? `bundle.${ext}` : `bundle.[hash].${ext}`;
+const filename = ext => isDev ? `bundle.${ext}` : `bundle.[hash].${ext}`;
+
 const jsLoaders = () => {
-  const loaders = [{
-    loader: 'babel-loader',
-    options: {
-      presets: ['@babel/preset-env'],
+  const loaders = [
+    {
+      loader: 'babel-loader',
+      options: {
+        presets: ['@babel/preset-env'],
+        plugins: ['@babel/plugin-proposal-class-properties'],
+      },
     },
-  }];
+  ];
 
-  if (isDevelopment) {
-    loaders.push('eslint-loader');
+  if (isDev) {
+    loaders.push('eslint-loader')
   }
-};
+
+  return loaders
+}
 
 module.exports = {
   context: path.resolve(__dirname, 'src'),
@@ -36,18 +42,18 @@ module.exports = {
       '@core': path.resolve(__dirname, 'src/core'),
     },
   },
-  devtool: isDevelopment ? 'source-map' : false,
+  devtool: isDev ? 'source-map' : false,
   devServer: {
-    port: 8800,
-    hot: isDevelopment,
+    port: 3000,
+    hot: isDev
   },
   plugins: [
     new CleanWebpackPlugin(),
     new HTMLWebpackPlugin({
       template: 'index.html',
       minify: {
-        removeComments: isProduction,
-        collapseWhitespace: isProduction,
+        removeComments: isProd,
+        collapseWhitespace: isProd,
       },
     }),
     new CopyPlugin([
@@ -68,7 +74,7 @@ module.exports = {
           {
             loader: MiniCssExtractPlugin.loader,
             options: {
-              hmr: isDevelopment,
+              hmr: isDev,
               reloadAll: true,
             },
           },
@@ -83,4 +89,4 @@ module.exports = {
       },
     ],
   },
-};
+}

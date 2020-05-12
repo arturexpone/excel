@@ -10,7 +10,11 @@
     "arrow-parens": "off",
     "linebreak-style": "off",
     "max-len": "off",
-    "require-jsdoc": "off"
+    "require-jsdoc": "off",
+    "indent": "off",
+    "constructor-super": "off",
+    "eol-last": "off",
+    "operator-linebreak": "off"
   },
   "extends": ["eslint:recommended", "google"]
 }
