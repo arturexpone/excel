@@ -6,7 +6,10 @@ export function toHTML(key) {
     return `
         <li class="db__record">
             <a href="#excel/${id}">${model.title}</a>
-            <strong>12.06.2k20</strong>
+            <strong>
+                ${new Date(model.openedDate).toLocaleDateString()}, time:
+                ${new Date(model.openedDate).toLocaleTimeString()}
+            </strong>
         </li>`
 
 }
@@ -27,12 +30,12 @@ export function createRecordsTable() {
     const keys = getAllKeys();
     console.log(keys)
     if (!keys.length) {
-        return `<p>You haven't created any tables yet</p>`;
+        return `<p style='font-weight: bold'>You haven't created any tables yet</p>`;
     }
     return `
         <div class="db__list-header">
-            <span>TITLE</span>
-            <span>DATE OF CREATION</span>
+            <span style='font-weight: bold'>TITLE</span>
+            <span style='font-weight: bold'>LAST VISIT</span>
         </div>
         
         <ul class="db__list">
