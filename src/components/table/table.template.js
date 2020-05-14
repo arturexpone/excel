@@ -22,7 +22,10 @@ function toCell(state, row) {
         const width = getWidth(state.colState, col);
         const id = `${row}:${col}`;
         const data = state.dataState[id];
-        const styles = toInlineStyles(state.stylesState[id]);
+        const styles = toInlineStyles({
+            ...defaultStyles,
+            ...state.stylesState[id],
+        });
         return `<div class='cell' contenteditable 
                     data-col='${col}' 
                     data-type='cell'
