@@ -7,11 +7,13 @@ import {Formula} from '@/components/formula/Formula';
 import {Table} from '@/components/table/Table';
 import './scss/index.scss'
 
-const store = createStore(rootReducer);
+const store = createStore(rootReducer, {
+    tableTitle: 'My Table',
+});
 
 const excel = new Excel('#app', {
     components: [Header, Toolbar, Formula, Table],
-    store: store,
+    store,
 });
 
 excel.render();

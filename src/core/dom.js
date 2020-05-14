@@ -80,7 +80,7 @@ class Dom {
         return this.data.id;
     }
 
-    focus () {
+    focus() {
         this.$el.focus();
         return this;
     }
@@ -98,7 +98,6 @@ class Dom {
             this.$el.style[key] = styles[key];
         })
     }
-
 }
 
 export function $(selector) {
