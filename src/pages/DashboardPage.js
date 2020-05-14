@@ -1,8 +1,10 @@
 import {Page} from '@core/Page';
-import {$} from "@core/dom";
+import {$} from '@core/dom';
+import {createRecordsTable} from '@/pages/dashboard.functions';
 
 export class DashboardPage extends Page {
     getRoot() {
+        const now = Date.now().toString();
         return $.create('div', 'db').html(`
             <div class="db__header">
                 <h1>Excel Dashboard</h1>
@@ -11,7 +13,7 @@ export class DashboardPage extends Page {
             <div class="db__new">
             
             <div class="db__view">
-                <a href="#" class="db__create">
+                <a href="#excel/${now}" class="db__create">
                 New <br/> table
                 </a>
             </div>
@@ -19,22 +21,7 @@ export class DashboardPage extends Page {
             </div>
             
             <div class="db__table db__view">
-                <div class="db__list-header">
-                    <span>Title</span>
-                    <span>Creation date</span>
-                </div>
-                
-                <ul class="db__list">
-                    <li class="db__record">
-                    <a href="#">Toolbar number one</a>
-                    <strong>12.06.2k20</strong>
-                    </li>
-                    
-                    <li class="db__record">
-                    <a href="#">Toolbar number one</a>
-                    <strong>12.06.2k20</strong>
-                    </li>
-                </ul>
+                ${createRecordsTable()}
             </div>
             `);
     }
